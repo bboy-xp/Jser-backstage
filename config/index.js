@@ -14,6 +14,10 @@ module.exports = {
       '/getList': {
         target: 'http://127.0.0.1:7001',
         changeOrigin: 'true',
+      },
+      '/getData': {
+        target: 'http://127.0.0.1:7001',
+        changeOrigin: 'true',
       }
     },
 
