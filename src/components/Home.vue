@@ -7,7 +7,7 @@
       <div class="content">
         <div class="record">
           <span>浏览总人数</span>
-          <span class="count">200</span>
+          <span class="count">{{userData.allUser}}</span>
         </div>
         <div class="record">
           <span>提交总人数</span>
@@ -40,7 +40,7 @@ export default {
   },
   mounted: async function getData() {
     const result = await axios.get('/getData');
-    // console.log(result.data);
+    console.log(result.data);
     this.userData = result.data;
   },
   methods: {

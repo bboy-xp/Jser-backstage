@@ -18,7 +18,15 @@ module.exports = {
       '/getData': {
         target: 'http://127.0.0.1:7001',
         changeOrigin: 'true',
-      }
+      },
+      '/editData': {
+        target: 'http://127.0.0.1:7001',
+        changeOrigin: 'true',
+      },
+      '/deleteData': {
+        target: 'http://127.0.0.1:7001',
+        changeOrigin: 'true',
+      },
     },
 
     // Various Dev Server settings

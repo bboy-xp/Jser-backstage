@@ -51,7 +51,7 @@
           </el-table-column>
           <el-table-column
             prop="reason"
-            label="原因"
+            label="动机"
             width="75">
           </el-table-column>
           <el-table-column
@@ -74,7 +74,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+        <el-dialog title="编辑信息" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="openId" :label-width="formLabelWidth">
       <el-input v-model="form.openId" auto-complete="off"></el-input>
@@ -100,9 +100,6 @@
     <el-form-item label="等级" :label-width="formLabelWidth">
       <el-input v-model="form.level" auto-complete="off"></el-input>
     </el-form-item>
-    <el-form-item label="原因" :label-width="formLabelWidth">
-      <el-input v-model="form.reason" auto-complete="off"></el-input>
-    </el-form-item>
     <el-form-item label="自我介绍" :label-width="formLabelWidth">
       <el-input v-model="form.introduce" auto-complete="off"></el-input>
     </el-form-item>
@@ -112,7 +109,7 @@
   </el-form>
   <div slot="footer" class="dialog-footer">
     <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false;editData(form)">确 定</el-button>
   </div>
 </el-dialog>
   
@@ -168,14 +165,21 @@ export default {
       this.form.introduce = row.introduce;
       this.form.otherReason = row.otherReason;
     },
-    handleDelete(index, row) {
+    async handleDelete(index, row) {
       console.log(index, row);
       this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
           center: true
-        }).then(() => {
+        }).then(async () => {
+          // console.log(123123);
+          row.deleted = true;
+          // console.log(row);
+          const result = await axios.post('/deleteData',row);
+          // location.reload();
+          this.userList = result.data;
+
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -186,7 +190,14 @@ export default {
             message: '已取消删除'
           });
         });
-    }
+    },
+    async editData(form) {
+      // console.log(form);
+      const result = await axios.post('/editData',form);
+      // location.reload();
+      // console.log(result);
+      this.userList = result.data;
+    },
   }
 };
 </script>
