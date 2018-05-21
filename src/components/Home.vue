@@ -1,8 +1,20 @@
 <template>
   <div class="backstage">
       <div class="lists">
-          <div class="list selected" >总览</div>
-          <div class="list" @click="gotoList">表单列表</div>
+          <!-- <div class="list selected" >总览</div>
+          <div class="list" @click="gotoList">表单列表</div> -->
+          <el-menu
+            default-active="1"
+            class="el-menu-vertical-demo">
+            <el-menu-item index="1">
+              <i class="el-icon-menu"></i>
+              <span slot="title">总览</span>
+            </el-menu-item>
+            <el-menu-item index="2"  @click="gotoList">
+              <i class="el-icon-menu"></i>
+              <span slot="title">表单管理</span>
+            </el-menu-item>
+          </el-menu>
       </div>
       <div class="content">
         <div class="record">
